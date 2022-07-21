@@ -3,6 +3,7 @@ Sebuah website onlineshop perfieral gaming sederhana yang dibuat menggunakan htm
 
 
 cara menjalankan website:
+
 1.harus mempunyai localhost contohnya xampp 
 
 2.download file dan simpan file ke dalam folder htdocs
