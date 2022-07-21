@@ -1,0 +1,18 @@
+
+/* halaman profile */
+
+
+
+@media screen and (min-width: 992px) {
+   .imageResize{
+       object-fit: contain;
+       width: 150px;
+       height: 150px;
+   }
+    .merah{
+        color: red;
+        background-color:red ;
+    }
+}
+
+/* penutup halaman profile */

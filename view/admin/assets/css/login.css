@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, 
+body,.container,.blur {
+    height: 100%;
+  
+}
+body{
+    background-image: url(../../assets/img/Login/bgLogin.jpg);
+}
+
+.kotak{
+    width: 900px;
+
+}
+.blur {
+   
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(50px); 
+ 
+  }
+
+/* responsive */
+@media only screen and (max-width: 650px) {
+   .kotak{
+    height: auto;
+    width: auto;
+   }
+  }

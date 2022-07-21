@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+/* custom scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+::selection{
+    background: rgb(0,123,255,0.3);
+}
+.konten{
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 30px;
+}
+.navbar1{
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    padding: 25px 0;
+    transition: all 0.3s ease;
+}
+.navbar1.sticky{
+    background: #1b1b1b;
+    padding: 10px 0;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.1);
+}
+.navbar1 .konten{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.navbar1 .logo a{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.navbar1 .urutanMenu{
+    display: flex;
+    margin-top: 15px;
+}
+.urutanMenu li{
+    list-style: none;
+}
+.urutanMenu li a{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.urutanMenu li a:hover{
+    color: #007bff;
+}
+.banner{
+    background: url("img/Banner.jpg") no-repeat;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+.about{
+    padding: 30px 0;
+}
+.about .title{
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+.about p{
+    padding-top: 20px;
+    text-align: justify;
+}
+.icon{
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+}
+.urutanMenu .cancel-btn{
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+/*button card*/
+.buttonSize{
+    width: 80px;
+}
+
+/*akan datang*/
+.newItem{
+    padding: 30px 0;
+    background-color: black;
+    color: white;
+}
+.akanText{
+    font-size: 30px;
+}
+/*image*/
+.image{
+    position: relative;
+
+}
+
+.image__img{
+    display: block;
+    width: 100%;
+}
+
+.image__overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0 ;
+    transition: opacity 0.25s;
+}
+.image__overlay--blur{
+    backdrop-filter: blur();
+}
+.image__overlay > *{
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+.image__overlay:hover{
+    opacity: 1;
+}
+.image__overlay:hover > *{
+    transform: translateY(0);
+}
+.image__title{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.image__description{
+    font-size:1em;
+    margin-top: 0.25em;
+    text-align: center;
+}
+
+/*penutup akan datang*/
+
+
+/*mengapa kami*/
+.whyUs{
+    background-color: white;
+    padding: 30px 0;
+    height: 300px;
+}
+
+.whyUs .head{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.whyUs .title{
+    font-size: 25px;
+}
+
+.whyUs .logo{
+    font-size: 60px;
+}
+/*penutup mengapa kami*/
+
+/*hubungi kami*/
+.contactUs{
+    background-color: black;
+    padding: 30px 0;
+    color: white;
+}
+
+
+/* penutup hubungi kami*/
+
+/*HALAMAN DETAIL PRODUK*/
+.pembatas{
+    padding: 30px 0;
+}
+
+.detail{
+    margin-top: 100px;
+    color: white;
+    text-align: justify;
+}
+
+.buttonDetail{
+    width: 120px;
+}
+
+/*PENUUTUP HALAMAN DETAIL PRODUK*/
+
+/*HALAMAN PRODUK*/
+.tes{
+    height: 10px;
+}
+.produkButtonSize{
+    width: 100px;
+    margin-right: 10px;
+}
+/*PENUTUP HALAMAN PRODUK*/
+
+@media (max-width: 1230px) {
+    .konten{
+        padding: 0 60px;
+    }
+
+
+    .whyUs{
+        height: 200px;
+    }
+
+    .whyUs .head{
+        font-size: 24px;
+    }
+    .whyUs .logo{
+        font-size: 30px;
+    }
+
+    .whyUs .title{
+        font-size: 20px;
+    }
+
+    /*akan datang*/
+    .image__title{
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .image__description{
+        font-size: 0.5em;
+        margin-top: 0.25em;
+        text-align: center;
+    }
+
+    /*DETAIL PRODUK*/
+    .detail .spasi{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    /*HALAMAN PRODUK*/
+    .pembatasProduk{
+        padding: 40px 0;
+        margin-bottom: 10px;
+        background-color: black;
+    }
+    .detail{
+        text-align: center;
+    }
+
+    .card-title .fontHp{
+        font-size: 15px; !important;
+    }
+
+}
+@media (max-width: 1100px) {
+    .konten{
+        padding: 0 40px;
+    }
+    .whyUs{
+        height: 200px;
+    }
+    .whyUs .head{
+        font-size: 24px;
+    }
+
+    .whyUs .logo{
+        font-size: 30px;
+    }
+    .whyUs .title{
+        font-size: 20px;
+    }
+
+    /*akan datang*/
+    .image__title{
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .image__description{
+        font-size: 0.5em;
+        margin-top: 0.25em;
+        text-align: center;
+    }
+    /*DETAIL PRODUK*/
+    .detail .spasi{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    /*HALAMAN PRODUK*/
+    .pembatasProduk{
+        padding: 40px 0;
+        margin-bottom: 10px;
+        background-color: black;
+    }
+    .detail{
+        text-align: center;
+    }
+    .card-title .fontHp{
+        font-size: 15px; !important;
+    }
+}
+@media (max-width: 900px) {
+    .konten{
+        padding: 0 30px;
+    }
+
+    .whyUs{
+        height: 200px;
+    }
+    .whyUs .head{
+        font-size: 24px;
+    }
+    .whyUs .logo{
+        font-size: 30px;
+    }
+    .whyUs .title{
+        font-size: 20px;
+    }
+
+    /*akan datang*/
+    .image__title{
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .image__description{
+        font-size: 0.5em;
+        margin-top: 0.25em;
+        text-align: center;
+    }
+    /*DETAIL PRODUK*/
+    .detail .spasi{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    /*HALAMAN PRODUK*/
+    .pembatasProduk{
+        padding: 40px 0;
+        margin-bottom: 10px;
+        background-color: black;
+    }
+    .detail{
+        text-align: center;
+    }
+    .card-title .fontHp{
+        font-size: 15px; !important;
+    }
+
+}
+@media (max-width: 868px) {
+    body.disabled{
+        overflow: hidden;
+    }
+    .icon{
+        display: block;
+    }
+    .icon.hide{
+        display: none;
+    }
+    .navbar1 .urutanMenu{
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        max-width: 400px;
+        left: -100%;
+        top: 0px;
+        display: block;
+        padding: 40px 0;
+        text-align: center;
+        background: #222;
+        transition: all 0.3s ease;
+        margin-top: 0px;
+    }
+    .navbar1.show .urutanMenu{
+        left: 0%;
+    }
+    .navbar1 .urutanMenu li{
+        margin-top: 45px;
+    }
+    .navbar1 .urutanMenu li a{
+        font-size: 23px;
+        margin-left: -100%;
+        transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .navbar1.show .urutanMenu li a{
+        margin-left: 0px;
+    }
+    .card-title .fontHp{
+        font-size: 15px; !important;
+    }
+
+}
+@media (max-width: 380px) {
+    .navbar1 .logo a{
+        font-size: 27px;
+    }
+}

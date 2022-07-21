@@ -1,0 +1,273 @@
+<?php
+//koneksi ke database
+$conn = mysqli_connect("localhost", "root", "", "gearku");
+
+// fungsi buat manggil data sesuai tabel
+function query($query)
+{
+    global $conn;
+    // ambil dari tabel / query
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+//Controller barang
+{
+    // tambah
+    function tambah($data)
+    {
+        global $conn;
+
+        // ambil data dari tiap elemen dari form
+        $nama = htmlspecialchars($data["nama"]);
+        $merk = htmlspecialchars($data["merk"]);
+        $kategori = htmlspecialchars($data["kategori"]);
+        $status = htmlspecialchars($data["status"]);
+        $garansi = htmlspecialchars($data["garansi"]);
+        $linky = htmlspecialchars($data["link"]);
+        $harga = htmlspecialchars($data["harga"]);
+
+
+        // upload gambar
+        $gambar = upload();
+
+        if (!$gambar) {
+            return false;
+        }
+
+        //query insert data
+        $query = "INSERT INTO barang VALUES
+        ('','$nama','$merk','$kategori',$harga,'$status','$garansi','$linky','$gambar')";
+        // masukin data
+        mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function upload()
+    {
+
+        $namaFile = $_FILES['gambar']['name'];
+        $ukuranFile = $_FILES['gambar']['size'];
+        $error = $_FILES['gambar']['error'];
+        $tmpName = $_FILES['gambar']['tmp_name'];
+
+        //cek apakah ada gambar yang di uplaod
+        if ($error === 4) {
+            echo "<script>
+            alert('Pilih gambar terlebih  dahulu!');
+        </script>";
+            return false;
+        }
+
+        //cek apakah yang diupload gambar atau tidak
+        $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+        $ekstensiGambar = explode('.', $namaFile);
+        $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+        if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+            echo "<script>
+        alert('Yang anda upload bukan gambar!');
+    </script>";
+            return false;
+        }
+
+        //cek jika ukuran gambar terlalu besar
+        if ($ukuranFile > 100000) {
+            echo "<script>
+        alert('Ukuran Gambar Terlalu Besar');
+    </script>";
+            return false;
+        }
+
+        //kalau foto sudah melwati pengecekan
+        //generate nama gambar baru
+        $namaFileBaru = uniqid();
+        $namaFileBaru .= '.';
+        $namaFileBaru .= $ekstensiGambar;
+        move_uploaded_file($tmpName, '../imgBarang/' . $namaFileBaru);
+
+        return $namaFileBaru;
+    }
+
+    function hapus($id)
+    {
+        global $conn;
+
+        // menghapus foto dalam folder(unlink)
+        $ambil = mysqli_query($conn, "SELECT *  FROM barang WHERE id = $id");
+        $row = mysqli_fetch_assoc($ambil);
+        $namaFile = $row["foto"];
+        unlink("../imgBarang/" . $namaFile);
+
+
+        //query hapus data
+        mysqli_query($conn, "delete from barang where id = $id");
+        return mysqli_affected_rows($conn);
+    }
+
+
+    function ubah($data)
+    {
+        global $conn;
+        // ambil data dari tiap elemen dari form
+        $id = $data["id"];
+        // var_dump($data);
+        // var_dump($id);
+        $nama = htmlspecialchars($data["nama"]);
+        $merk = htmlspecialchars($data["merk"]);
+        $kategori = htmlspecialchars($data["kategori"]);
+        $status = htmlspecialchars($data["status"]);
+        $garansi = htmlspecialchars($data["garansi"]);
+        $linky = htmlspecialchars($data["link"]);
+        $harga = htmlspecialchars($data["harga"]);
+        $gambarLama = htmlspecialchars($data["gambarLama"]);
+
+        //cek apakah user pilih gambar atau tidak
+        if ($_FILES['gambar']['error'] === 4) {
+            $gambar = $gambarLama;
+        } else {
+            $gambar = upload();
+            if ($gambar) {
+                //query insert data
+                $query = "UPDATE barang SET
+            nama = '$nama'  ,
+            merk = '$merk'  ,
+            kategori_id = '$kategori',
+            harga = '$harga',
+            status = '$status',
+            garansi = '$garansi',
+            link_youtube = '$linky' ,
+            foto = '$gambar'
+            WHERE id = $id
+            ";
+                // masukin data
+                return mysqli_query($conn, $query);
+            } else {
+                return false;
+            }
+        }
+        //query insert data
+        $query = "UPDATE BARANG SET
+              nama = '$nama'  ,
+              merk = '$merk'  ,
+              kategori_id = '$kategori',
+              harga = '$harga',
+              status = '$status',
+              garansi = '$garansi',
+              link_youtube = '$linky' ,
+              foto = '$gambar'
+              WHERE id = $id
+              ";
+        // masukin data
+        return mysqli_query($conn, $query);
+    }
+
+}
+
+//controller kategori
+{
+    function tambahKategori($data)
+    {
+        global $conn;
+
+        // ambil data dari tiap elemen dari form
+        $kategori = htmlspecialchars($data["kategori"]);
+
+
+        //query insert data
+        $query = "INSERT INTO kategori VALUES
+        ('','$kategori')";
+        // masukin data
+        mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function hapusKategori($id)
+    {
+        global $conn;
+
+
+        //query hapus data
+        mysqli_query($conn, "delete from kategori where id = $id");
+        return mysqli_affected_rows($conn);
+    }
+
+    function ubahKategori($data)
+    {
+        global $conn;
+        // ambil data dari tiap elemen dari form
+        $id = $data["id"];
+        $nama = htmlspecialchars($data["nama"]);
+
+
+        //query insert data
+        $query = "UPDATE kategori SET
+              nama = '$nama'
+              WHERE id = $id
+              ";
+        // masukin data
+        return mysqli_query($conn, $query);
+    }
+}
+
+//controller link
+{
+    function ubahLink($data)
+    {
+        global $conn;
+        // ambil data dari tiap elemen dari form
+        $id = $data["id"];
+        $instagram = htmlspecialchars($data["ig"]);
+        $facebook = htmlspecialchars($data["fb"]);
+        $whatsapp = htmlspecialchars($data["wa"]);
+
+
+        //query insert data
+        $query = "UPDATE sosialmedia SET
+              instagram = '$instagram',
+              facebook = '$facebook',
+              whatsapp = '$whatsapp'
+              WHERE id = $id
+              ";
+        // masukin data
+        return mysqli_query($conn, $query);
+    }
+
+}
+
+
+//controller akun
+{
+    function tambahAkun($data)
+    {
+        global $conn;
+
+        // ambil data dari tiap elemen dari form
+        $nama = htmlspecialchars($data["nama"]);
+        $email = htmlspecialchars($data["email"]);
+        $password = htmlspecialchars($data["password"]);
+        $role = htmlspecialchars($data["role"]);
+
+
+        // upload gambar
+        $gambar = upload();
+
+        if (!$gambar) {
+            return false;
+        }
+
+        //query insert data
+        $query = "INSERT INTO user VALUES
+        ('','$nama','$email','$password','$role','$gambar')";
+        // masukin data
+        mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+}
